@@ -9,5 +9,8 @@ public class Pawn extends Piece {
 
         this.icon=icon;
     }
+    public static boolean isPawn(String piece) {
+        return piece.equals("♙") || piece.equals("♟");
+    }
 
 }

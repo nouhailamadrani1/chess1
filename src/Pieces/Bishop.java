@@ -9,5 +9,9 @@ public class Bishop  extends Piece {
         this.icon=icon;
     }
 
+    public static boolean isBishop(String piece) {
+        return piece.equals("♗") || piece.equals("♝");
+    }
+
 
 }

@@ -9,6 +9,9 @@ public class King extends Piece {
 
         this.icon=icon;
     }
+    public static boolean isKing(String piece) {
+        return piece.equals("♕") || piece.equals("♛");
+    }
 
 
 

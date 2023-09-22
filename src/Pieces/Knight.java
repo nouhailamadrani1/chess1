@@ -8,5 +8,8 @@ public class Knight extends Piece {
 
         this.icon=icon;
     }
+    public static boolean isKnight(String piece) {
+        return piece.equals("♘") || piece.equals("♞");
+    }
 
 }

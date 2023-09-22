@@ -10,5 +10,8 @@ public class Queen extends Piece {
 
         this.icon=icon;
     }
+    public static boolean isQueen(String piece) {
+        return piece.equals("♔") || piece.equals("♚");
+    }
 
 }

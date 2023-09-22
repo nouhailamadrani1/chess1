@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
+import static Pieces.Bishop.isBishop;
+import static Pieces.King.isKing;
+import static Pieces.Knight.isKnight;
+import static Pieces.Pawn.isPawn;
+import static Pieces.Queen.isQueen;
+import static Pieces.Rook.isRook;
+
 public class ChessBoard extends JPanel {
     private static final int BOARD_SIZE = 8;
     private static final int SQUARE_SIZE = 60;
@@ -34,9 +41,7 @@ public class ChessBoard extends JPanel {
                 String pieceToMove = chessBoard.getPieceAt(fromRow, fromCol);
                 if (isPawn(pieceToMove)) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a pawn.");
-//                } else {
-//                    System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is not a pawn.");
-//                }
+
                 } else if (isKing(pieceToMove)) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a King.");
 
@@ -63,7 +68,7 @@ public class ChessBoard extends JPanel {
                 int toCol = scanner.nextInt();
 
                 chessBoard.movePiece(fromRow, fromCol, toRow, toCol);
-                System.out.println("good game");
+                System.out.println("Good Game GG");
             } else {
                 System.out.println("There is no piece at (" + fromRow + ", " + fromCol + ")");
             }
@@ -84,26 +89,6 @@ public class ChessBoard extends JPanel {
         chessPieces[toRow][toCol] = pieceToMove;
         repaint();
     }
-
-    private static boolean isPawn(String piece) {
-        return piece.equals("♙") || piece.equals("♟");
-    }
-    private static boolean isQueen(String piece) {
-        return piece.equals("♔") || piece.equals("♚");
-    }
-    private static boolean isRook(String piece) {
-        return piece.equals("♖") || piece.equals("♜");
-    }
-    private static boolean isKnight(String piece) {
-        return piece.equals("♘") || piece.equals("♞");
-    }
-    private static boolean isBishop(String piece) {
-        return piece.equals("♗") || piece.equals("♝");
-    }
-    private static boolean isKing(String piece) {
-        return piece.equals("♕") || piece.equals("♛");
-    }
-
 
     private  void initializeBoard() {
 

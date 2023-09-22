@@ -10,5 +10,9 @@ public class Rook extends Piece {
         this.icon=icon;
     }
 
+    public static boolean isRook(String piece) {
+        return piece.equals("♖") || piece.equals("♜");
+    }
+
 
 }
