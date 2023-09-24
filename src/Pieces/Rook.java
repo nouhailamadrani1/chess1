@@ -1,16 +1,26 @@
 package Pieces;
 
 public class Rook extends Piece {
-    public Rook() {
 
-        this.icon="♖";
-    }
-       public Rook(String icon) {
 
-        this.icon=icon;
+    public Rook(String icon,String color) {
+        super(icon,color);
     }
 
-    public static boolean isRook(String piece) {
+    @Override
+    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
+
+
+        if (toRow ==fromRow + 1 && fromCol == toCol) {
+            System.out.println("Valid move!");
+            return true;
+        } else {
+            System.out.println("Invalid move!");
+            return false;
+        }
+    }
+
+    public static boolean isRook(Piece piece) {
         return piece.equals("♖") || piece.equals("♜");
     }
 

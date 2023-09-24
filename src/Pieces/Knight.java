@@ -1,14 +1,24 @@
 package Pieces;
 
 public class Knight extends Piece {
-    public Knight() {
-        this.icon="♘";
+    public Knight(String icon,String color) {
+        super(icon,color);
     }
-    public Knight(String icon) {
 
-        this.icon=icon;
+    @Override
+    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
+
+
+        if (toRow ==fromRow + 1 && fromCol == toCol) {
+            System.out.println("Valid move!");
+            return true;
+        } else {
+            System.out.println("Invalid move!");
+            return false;
+        }
     }
-    public static boolean isKnight(String piece) {
+
+    public static boolean isKnight(Piece piece) {
         return piece.equals("♘") || piece.equals("♞");
     }
 

@@ -6,17 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
-import static Pieces.Bishop.isBishop;
-import static Pieces.King.isKing;
-import static Pieces.Knight.isKnight;
-import static Pieces.Pawn.isPawn;
-import static Pieces.Queen.isQueen;
-import static Pieces.Rook.isRook;
-
 public class ChessBoard extends JPanel {
     private static final int BOARD_SIZE = 8;
     private static final int SQUARE_SIZE = 60;
-    private String[][] chessPieces = new String[BOARD_SIZE][BOARD_SIZE];
+    private Piece[][] chessPieces = new Piece[BOARD_SIZE][BOARD_SIZE];
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Chessboard");
@@ -37,30 +30,21 @@ public class ChessBoard extends JPanel {
 
 
             if (chessBoard.getPieceAt(fromRow, fromCol) != null) {
+                Piece pieceToMove = chessBoard.getPieceAt(fromRow, fromCol);
                 System.out.println("There is a piece at (" + fromRow + ", " + fromCol + ")");
-                String pieceToMove = chessBoard.getPieceAt(fromRow, fromCol);
-                if (isPawn(pieceToMove)) {
-                    System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a pawn.");
 
-                } else if (isKing(pieceToMove)) {
+                if (pieceToMove instanceof Pawn) {
+                    System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a Pawn.");
+                } else if (pieceToMove instanceof King) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a King.");
-
-                }
-                else if (isKnight(pieceToMove)) {
+                } else if (pieceToMove instanceof Knight) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a Knight.");
-
-                }
-                else if (isQueen(pieceToMove)) {
+                } else if (pieceToMove instanceof Queen) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a Queen.");
-
-                }
-                else if (isRook(pieceToMove)) {
+                } else if (pieceToMove instanceof Rook) {
                     System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a Rook.");
-
-                }
-                else if (isBishop(pieceToMove)) {
-                    System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a King.");
-
+                } else if (pieceToMove instanceof Bishop) {
+                    System.out.println("The piece at (" + fromRow + ", " + fromCol + ") is a Bishop.");
                 }
 
                 System.out.println("Enter (toRow, toCol):");
@@ -79,68 +63,79 @@ public class ChessBoard extends JPanel {
         initializeBoard();
     }
 
-    public String getPieceAt(int row, int col) {
+    public Piece getPieceAt(int row, int col) {
+
         return chessPieces[row][col];
     }
 
     public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
-        String pieceToMove = chessPieces[fromRow][fromCol];
-        chessPieces[fromRow][fromCol] = null;
-        chessPieces[toRow][toCol] = pieceToMove;
-        repaint();
+        Piece pieceToMove = chessPieces[fromRow][fromCol];
+
+        if (pieceToMove != null && pieceToMove.isValidMove(fromRow,fromCol,toRow, toCol, chessPieces[fromRow][fromCol])) {
+            chessPieces[fromRow][fromCol] = null;
+            pieceToMove.setPosition(toRow, toCol);
+            chessPieces[toRow][toCol] = pieceToMove;
+            repaint();
+
+        } else {
+            System.out.println("Invalid move!");
+        }
     }
 
     private  void initializeBoard() {
 
-        King whiteKing = new King();
-        Knight whiteKnight1 = new Knight();
-        Bishop whiteBishop1 = new Bishop();
-        Queen whiteQueen = new Queen();
-        Knight whiteKnight2 = new Knight();
-        Bishop whiteBishop2 = new Bishop();
-        Rook whiteRook1 = new Rook();
-        Rook whiteRook2 = new Rook();
-        Pawn whitePawn = new Pawn();
+        King whiteKing = new King("♔","white");
+        Knight whiteKnight1 = new Knight("♘","white");
+        Bishop whiteBishop1 = new Bishop("♗","white");
+        Queen whiteQueen = new Queen("♕","white");
+        Knight whiteKnight2 = new Knight("♘","white");
+        Bishop whiteBishop2 = new Bishop("♗","white");
+        Rook whiteRook1 = new Rook("♖","white");
+        Rook whiteRook2 = new Rook("♖","white");
+        Pawn whitePawn = new Pawn("♙","white");
 
 
-        chessPieces[0][0] = whiteRook1.getIcon();
-        chessPieces[0][1] = whiteKnight1.getIcon();
-        chessPieces[0][2] = whiteBishop1.getIcon();
-        chessPieces[0][3] = whiteQueen.getIcon();
-        chessPieces[0][4] = whiteKing.getIcon();
-        chessPieces[0][5] = whiteBishop2.getIcon();
-        chessPieces[0][6] = whiteKnight2.getIcon();
-        chessPieces[0][7] = whiteRook2.getIcon();
+        chessPieces[0][0] = whiteRook1;
+        chessPieces[0][1] = whiteKnight1;
+        chessPieces[0][2] = whiteBishop1;
+        chessPieces[0][3] = whiteQueen;
+        chessPieces[0][4] = whiteKing;
+        chessPieces[0][5] = whiteBishop2;
+        chessPieces[0][6] = whiteKnight2;
+        chessPieces[0][7] = whiteRook2;
 
         for (int i = 0; i < BOARD_SIZE; i++) {
-            chessPieces[1][i] = whitePawn.getIcon();
+            chessPieces[1][i] = whitePawn;
         }
 
-        King blackKing = new King("♚");
-        Queen blackQueen = new Queen("♛");
-        Bishop blackBishop1 = new Bishop("♝");
-        Bishop blackBishop2 = new Bishop("♝");
-        Knight blackKnight1 = new Knight("♞");
-        Knight blackKnight2 = new Knight("♞");
-        Rook blackRook1 = new Rook("♜");
-        Rook blackRook2 = new Rook("♜");
-        Pawn blackPawn = new Pawn("♟");
+        King blackKing = new King("♚", "black");
+        Queen blackQueen = new Queen("♛", "black");
+        Bishop blackBishop1 = new Bishop("♝", "black");
+        Bishop blackBishop2 = new Bishop("♝", "black");
+        Knight blackKnight1 = new Knight("♞", "black");
+        Knight blackKnight2 = new Knight("♞", "black");
+        Rook blackRook1 = new Rook("♜", "black");
+        Rook blackRook2 = new Rook("♜", "black");
+        Pawn blackPawn = new Pawn("♟", "black");
 
 
-        chessPieces[7][4] = blackKing.getIcon();
-        chessPieces[7][3] = blackQueen.getIcon();
-        chessPieces[7][2] = blackBishop1.getIcon();
-        chessPieces[7][5] = blackBishop2.getIcon();
-        chessPieces[7][1] = blackKnight1.getIcon();
-        chessPieces[7][6] = blackKnight2.getIcon();
-        chessPieces[7][0] = blackRook1.getIcon();
-        chessPieces[7][7] = blackRook2.getIcon();
+        chessPieces[7][4] = blackKing;
+        chessPieces[7][3] = blackQueen;
+        chessPieces[7][2] = blackBishop1;
+        chessPieces[7][5] = blackBishop2;
+        chessPieces[7][1] = blackKnight1;
+        chessPieces[7][6] = blackKnight2;
+        chessPieces[7][0] = blackRook1;
+        chessPieces[7][7] = blackRook2;
 
         for (int i = 0; i < BOARD_SIZE; i++) {
-            chessPieces[6][i] = blackPawn.getIcon();
+            chessPieces[6][i] = blackPawn;
         }
 
     }
+
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -159,11 +154,12 @@ public class ChessBoard extends JPanel {
 
                 g.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
 
-                String piece = chessPieces[row][col];
+                Piece piece = chessPieces[row][col];
                 if (piece != null) {
                     g.setColor(Color.black);
                     g.setFont(new Font("Serif", Font.TRUETYPE_FONT, 36));
-                    g.drawString(piece, x + 17, y + 40);
+                    String pieceIcon = piece.getIcon().toString(); // Retrieve the icon of the piece
+                    g.drawString(pieceIcon, x + 17, y + 40);
                 }
             }
         }
