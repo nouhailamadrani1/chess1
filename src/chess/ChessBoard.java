@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ChessBoard extends JPanel {
     private static final int BOARD_SIZE = 8;
-    private static final int SQUARE_SIZE = 60;
+    private static final int SQUARE_SIZE = 70;
     private Piece[][] chessPieces = new Piece[BOARD_SIZE][BOARD_SIZE];
 
     public static void main(String[] args) {

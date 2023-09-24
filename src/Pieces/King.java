@@ -8,9 +8,7 @@ public class King extends Piece {
 
     }
 
-    public static boolean isKing(Piece piece) {
-        return piece.equals("♕") || piece.equals("♛");
-    }
+
     @Override
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
 

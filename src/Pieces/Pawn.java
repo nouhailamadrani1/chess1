@@ -5,9 +5,6 @@ public class Pawn extends Piece {
     public Pawn(String icon,String color) {
         super(icon,color);
     }
-    public static boolean isPawn(Piece piece) {
-        return piece.equals("♙") || piece.equals("♟");
-    }
 
     @Override
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
