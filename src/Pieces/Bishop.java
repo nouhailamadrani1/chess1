@@ -9,15 +9,24 @@ public class Bishop  extends Piece {
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
 
 
-        if (toRow ==fromRow + 1 && fromCol == toCol) {
+        if (toRow == fromRow + 1 && fromCol == toCol) {
             System.out.println("Valid move!");
             return true;
         } else {
             System.out.println("Invalid move!");
             return false;
         }
+//        if (toCol == (fromCol + 1) || toCol == (fromRow - 1) &&toRow == (fromRow + 1) || toRow == (fromRow - 1)  )  {
+//            System.out.println("Valid move!");
+//            return true;
+//        } else {
+//            System.out.println("Invalid move!");
+//            return false;
+//        }
+//    }
+//
+//}
     }
-
     public static boolean isBishop(Piece piece) {
         return piece.equals("♗") || piece.equals("♝");
     }

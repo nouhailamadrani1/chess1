@@ -15,7 +15,14 @@ public class King extends Piece {
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
 
 
-        if (toRow ==fromRow + 1 && fromCol == toCol) {
+        if ((toCol == (fromCol + 1) && toRow == fromRow) ||
+                (toCol == (fromCol - 1) && toRow == fromRow) ||
+                (toRow == (fromRow + 1) && toCol == fromCol) ||
+                (toRow == (fromRow - 1) && toCol == fromCol) ||
+                (toCol == (fromCol + 1) && toRow == (fromRow + 1)) ||
+                (toCol == (fromCol - 1) && toRow == (fromRow + 1)) ||
+                (toCol == (fromCol + 1) && toRow == (fromRow - 1)) ||
+                (toCol == (fromCol - 1) && toRow == (fromRow - 1))) {
             System.out.println("Valid move!");
             return true;
         } else {
