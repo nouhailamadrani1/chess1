@@ -9,6 +9,7 @@ public class Pawn extends Piece {
     @Override
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
 
+
         if (this.getColor().equals("white")) {
             if (toRow ==fromRow + 1 && fromCol == toCol) {
                 System.out.println("Valid move!");

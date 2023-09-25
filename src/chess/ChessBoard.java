@@ -71,22 +71,28 @@ public class ChessBoard extends JPanel {
 
     public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
         Piece pieceToMove = chessPieces[fromRow][fromCol];
-
+        Piece targetPiece = chessPieces[toRow][toCol];
 
         if ((isWhiteTurn && pieceToMove != null && pieceToMove.getIcon().startsWith("♙")) ||
                 (!isWhiteTurn && pieceToMove != null && pieceToMove.getIcon().startsWith("♟"))) {
 
-            if (pieceToMove.isValidMove(fromRow,fromCol,toRow, toCol, chessPieces[fromRow][fromCol])) {
+            if (pieceToMove.isValidMove(fromRow, fromCol, toRow, toCol, chessPieces[fromRow][fromCol])) {
+                if (targetPiece != null && targetPiece.getColor() != pieceToMove.getColor()) {
+                    chessPieces[toRow][toCol] = null;
+                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon());
+                } else if (targetPiece != null && targetPiece.getColor() == pieceToMove.getColor()) {
+                    System.out.println("Invalid move! This is your piece: " + targetPiece.getIcon());
+                    return;
+                }
+
+
                 chessPieces[fromRow][fromCol] = null;
                 pieceToMove.setPosition(toRow, toCol);
                 chessPieces[toRow][toCol] = pieceToMove;
                 repaint();
 
-
                 isWhiteTurn = !isWhiteTurn;
-
                 System.out.println("Good move!");
-
             } else {
                 System.out.println("Invalid move!");
             }
@@ -94,7 +100,6 @@ public class ChessBoard extends JPanel {
             System.out.println("It is not your turn!");
         }
     }
-
     private  void initializeBoard() {
 
         King whiteKing = new King("♔","white");
