@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class ChessBoard extends JPanel {
     private static final int BOARD_SIZE = 8;
-    private static final int SQUARE_SIZE = 70;
+    private static final int SQUARE_SIZE = 60;
+    private boolean isWhiteTurn = true;
     private Piece[][] chessPieces = new Piece[BOARD_SIZE][BOARD_SIZE];
 
     public static void main(String[] args) {
@@ -52,7 +53,7 @@ public class ChessBoard extends JPanel {
                 int toCol = scanner.nextInt();
 
                 chessBoard.movePiece(fromRow, fromCol, toRow, toCol);
-                System.out.println("Good Game GG");
+
             } else {
                 System.out.println("There is no piece at (" + fromRow + ", " + fromCol + ")");
             }
@@ -71,14 +72,26 @@ public class ChessBoard extends JPanel {
     public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
         Piece pieceToMove = chessPieces[fromRow][fromCol];
 
-        if (pieceToMove != null && pieceToMove.isValidMove(fromRow,fromCol,toRow, toCol, chessPieces[fromRow][fromCol])) {
-            chessPieces[fromRow][fromCol] = null;
-            pieceToMove.setPosition(toRow, toCol);
-            chessPieces[toRow][toCol] = pieceToMove;
-            repaint();
 
+        if ((isWhiteTurn && pieceToMove != null && pieceToMove.getIcon().startsWith("♙")) ||
+                (!isWhiteTurn && pieceToMove != null && pieceToMove.getIcon().startsWith("♟"))) {
+
+            if (pieceToMove.isValidMove(fromRow,fromCol,toRow, toCol, chessPieces[fromRow][fromCol])) {
+                chessPieces[fromRow][fromCol] = null;
+                pieceToMove.setPosition(toRow, toCol);
+                chessPieces[toRow][toCol] = pieceToMove;
+                repaint();
+
+
+                isWhiteTurn = !isWhiteTurn;
+
+                System.out.println("Good move!");
+
+            } else {
+                System.out.println("Invalid move!");
+            }
         } else {
-            System.out.println("Invalid move!");
+            System.out.println("It is not your turn!");
         }
     }
 
