@@ -20,7 +20,7 @@ public abstract class Piece {
         this.color = color;
     }
 
-    public String getIcon() {
+    public String getIcon(String s) {
         return icon;
     }
 
@@ -37,7 +37,7 @@ public abstract class Piece {
         this.col = col;
     }
 
-    public abstract boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard);
+    public abstract boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard);
 
 
 }

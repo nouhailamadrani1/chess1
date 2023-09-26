@@ -10,7 +10,7 @@ public class King extends Piece {
 
 
     @Override
-    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
+    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard) {
 
 
         if ((toCol == (fromCol + 1) && toRow == fromRow) ||

@@ -6,7 +6,7 @@ public class Bishop  extends Piece {
     }
 
     @Override
-    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
+    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard) {
 
 
 

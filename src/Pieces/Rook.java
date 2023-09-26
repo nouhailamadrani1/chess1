@@ -8,7 +8,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece chessBoard) {
+    public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard) {
 
         if (fromRow == toRow && fromCol == toCol) {
             System.out.println("Invalid move! Destination is the same as the source position.");
