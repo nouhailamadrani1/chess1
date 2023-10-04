@@ -11,7 +11,7 @@ public class Rook extends Piece {
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard) {
 
         if (fromRow == toRow && fromCol == toCol) {
-            System.out.println("Invalid move! Destination is the same as the source position.");
+            System.out.println("Invalid move! ");
             return false;
         }
 
@@ -21,13 +21,11 @@ public class Rook extends Piece {
             return true;
         }
 
-        System.out.println("Invalid move! Rook can only move horizontally or vertically.");
+        System.out.println("Invalid move!");
         return false;
     }
 
-    public static boolean isRook(Piece piece) {
-        return piece.equals("♖") || piece.equals("♜");
-    }
+
 
 
 }

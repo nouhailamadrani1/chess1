@@ -20,7 +20,7 @@ public abstract class Piece {
         this.color = color;
     }
 
-    public String getIcon(String s) {
+    public String getIcon() {
         return icon;
     }
 

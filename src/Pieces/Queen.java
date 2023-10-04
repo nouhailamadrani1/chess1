@@ -9,6 +9,7 @@ public class Queen extends Piece {
     @Override
     public boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol, Piece[][] chessBoard) {
 
+
         if (fromRow == toRow && fromCol == toCol) {
             System.out.println("Invalid move!");
             return false;

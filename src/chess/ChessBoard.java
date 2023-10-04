@@ -69,62 +69,19 @@ public class ChessBoard extends JPanel {
         return chessPieces[row][col];
     }
 
-//    public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
-//        Piece pieceToMove = chessPieces[fromRow][fromCol];
-//        Piece targetPiece = chessPieces[toRow][toCol];
-//
-//        if ((isWhiteTurn && pieceToMove != null && pieceToMove.getColor().equals("white")) ||
-//                (!isWhiteTurn && pieceToMove != null && pieceToMove.getColor().equals("black"))) {
-//
-//            if (pieceToMove.isValidMove(fromRow, fromCol, toRow, toCol, chessPieces[fromRow][fromCol])) {
-//                if (targetPiece != null && targetPiece.getColor() != pieceToMove.getColor()) {
-//
-//
-//
-//                    chessPieces[toRow][toCol] = null;
-//                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon());
-//                } else if (targetPiece != null && targetPiece.getColor() == pieceToMove.getColor()) {
-//                    System.out.println("Invalid move! This is your piece: " + targetPiece.getIcon());
-//                    return;
-//
-//                }
-//
-//                chessPieces[fromRow][fromCol] = null;
-//                pieceToMove.setPosition(toRow, toCol);
-//                chessPieces[toRow][toCol] = pieceToMove;
-//                repaint();
-//
-//                isWhiteTurn = !isWhiteTurn;
-//                System.out.println("Good move!");
-//            } else {
-//                System.out.println("Invalid move!");
-//            }
-//        } else {
-//            System.out.println("It is not your turn!");
-//        }
-//    }
 
 
     public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
         Piece pieceToMove = chessPieces[fromRow][fromCol];
         Piece targetPiece = chessPieces[toRow][toCol];
-            if (targetPiece != null && targetPiece.getIcon("♙").equals("♙") && pieceToMove.getIcon("♟").equals("♟") && toRow == fromRow - 1 && fromCol == toCol) {
-            System.out.println("Invalid move! ");
+
+        if (targetPiece != null && targetPiece.getIcon().equals("♙") && pieceToMove.getIcon().equals("♟") && toRow == fromRow - 1 && fromCol == toCol) {
+            System.out.println("Invalid move!");
             return;
         }
-        else if (targetPiece != null && targetPiece.getIcon("♟").equals("♟") && pieceToMove.getIcon("♙").equals("♙") && toRow == fromRow + 1 && fromCol == toCol) {
-            System.out.println("Invalid move! ");
+        else if (targetPiece != null && targetPiece.getIcon().equals("♟") && pieceToMove.getIcon().equals("♙") && toRow == fromRow + 1 && fromCol == toCol) {
+            System.out.println("Invalid move!");
             return;
-        }
-        if (!pieceToMove.getIcon("♘").equals("♘") && !pieceToMove.getIcon("♞").equals("♞")) {
-            for (int i = fromRow; i <= toRow; i++) {
-                for (int j = fromCol; j <= toCol; j++) {
-                    if (chessPieces[i][j] != null) {
-                        System.out.println("Invalid move! There is a piece in the line.");
-                        return;
-                    }
-                }
-            }
         }
 
         if ((isWhiteTurn && pieceToMove != null && pieceToMove.getColor().equals("white")) ||
@@ -133,9 +90,9 @@ public class ChessBoard extends JPanel {
             if (pieceToMove.isValidMove(fromRow, fromCol, toRow, toCol,chessPieces)) {
                 if (targetPiece != null && targetPiece.getColor() != pieceToMove.getColor()) {
                     chessPieces[toRow][toCol] = null;
-                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon("♙"));
+                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon());
                 } else if (targetPiece != null && targetPiece.getColor() == pieceToMove.getColor()) {
-                    System.out.println("Invalid move! This is your piece: " + targetPiece.getIcon("♙"));
+                    System.out.println("Invalid move! This is your piece: " + targetPiece.getIcon());
                     return;
                 }
 
@@ -154,58 +111,9 @@ public class ChessBoard extends JPanel {
             System.out.println("It is not your turn!");
         }
     }
-//public void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
-//    Piece pieceToMove = chessPieces[fromRow][fromCol];
-//    Piece targetPiece = chessPieces[toRow][toCol];
-//
-//    if ((isWhiteTurn && pieceToMove != null && pieceToMove.getColor().equals("white")) ||
-//            (!isWhiteTurn && pieceToMove != null && pieceToMove.getColor().equals("black"))) {
-//
-//        if (pieceToMove.isValidMove(fromRow, fromCol, toRow, toCol, chessPieces[fromRow][fromCol])) {
-//            if (pieceToMove.getIcon().equals("♙") && (
-//                    (toRow == fromRow + 1 && toCol == fromCol + 1) ||
-//                            (toRow == fromRow + 1 && toCol == fromCol - 1)
-//            )) {
-//                if (targetPiece != null && targetPiece.getColor() != pieceToMove.getColor()) {
-//                    chessPieces[toRow][toCol] = null;
-//                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon());
-//                } else {
-//                    System.out.println("Invalid move! No opponent's piece to capture.");
-//                    return;
-//                }
-//                // Rest of your code for a valid move...
-//            } else if (pieceToMove.getIcon().equals("♟") && (
-//                    (toRow == fromRow - 1 && toCol == fromCol + 1) ||
-//                            (toRow == fromRow - 1 && toCol == fromCol - 1)
-//            )) {
-//                if (targetPiece != null && targetPiece.getColor() != pieceToMove.getColor()) {
-//                    chessPieces[toRow][toCol] = null;
-//                    System.out.println("Captured the opponent's piece: " + targetPiece.getIcon());
-//                } else {
-//                    System.out.println("Invalid move! No opponent's piece to capture.");
-//                    return;
-//                }
-//                // Rest of your code for a valid move...
-//            } else {
-//                if (targetPiece != null && targetPiece.getColor() == pieceToMove.getColor()) {
-//                    System.out.println("Invalid move! This is your piece: " + targetPiece.getIcon());
-//                    return;
-//                }
-//                chessPieces[fromRow][fromCol] = null;
-//                pieceToMove.setPosition(toRow, toCol);
-//                chessPieces[toRow][toCol] = pieceToMove;
-//                repaint();
-//
-//                isWhiteTurn = !isWhiteTurn;
-//                System.out.println("Good move!");
-//            }
-//        } else {
-//            System.out.println("Invalid move!");
-//        }
-//    } else {
-//        System.out.println("It is not your turn!");
-//    }
-//}
+
+
+
     private  void initializeBoard() {
 
         King whiteKing = new King("♔","white");
@@ -282,7 +190,7 @@ public class ChessBoard extends JPanel {
                 if (piece != null) {
                     g.setColor(Color.black);
                     g.setFont(new Font("Serif", Font.TRUETYPE_FONT, 36));
-                    String pieceIcon = piece.getIcon("♙").toString(); // Retrieve the icon of the piece
+                    String pieceIcon = piece.getIcon().toString(); // Retrieve the icon of the piece
                     g.drawString(pieceIcon, x + 17, y + 40);
                 }
             }
