@@ -19,7 +19,8 @@ public class Pawn extends Piece {
                     System.out.println("Valid move!");
                     return true;
                 }
-            } else if (targetPiece != null && ((toRow == fromRow + 1 && toCol == fromCol + 1) || (toRow == fromRow + 1 && toCol == fromCol - 1))) {
+            }
+            else if (targetPiece != null && ((toRow == fromRow + 1 && toCol == fromCol + 1) || (toRow == fromRow + 1 && toCol == fromCol - 1))) {
                 System.out.println("Valid move!");
                 return true;
             }

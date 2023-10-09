@@ -190,7 +190,7 @@ public class ChessBoard extends JPanel {
                 if (piece != null) {
                     g.setColor(Color.black);
                     g.setFont(new Font("Serif", Font.TRUETYPE_FONT, 36));
-                    String pieceIcon = piece.getIcon().toString(); // Retrieve the icon of the piece
+                    String pieceIcon = piece.getIcon().toString();
                     g.drawString(pieceIcon, x + 17, y + 40);
                 }
             }
